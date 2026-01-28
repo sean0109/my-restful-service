@@ -2,6 +2,7 @@ package io.github.skywlkr.myrestfulservice.controller;
 
 import io.github.skywlkr.myrestfulservice.bean.User;
 import io.github.skywlkr.myrestfulservice.dao.UserDaoService;
+import io.github.skywlkr.myrestfulservice.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -25,10 +26,12 @@ public class UserController {
 
     @GetMapping("/users/{id}")
     public User retrieveUser(@PathVariable Integer id) {
-        System.out.println("test");
-        log.info("id:{}", id);
+        User user = service.findById(id);
 
-        return service.findById(id);
+        if (user == null) {
+            throw new UserNotFoundException(String.format("ID[%s] not found", id), id);
+        }
+        return user;
     }
 
     @PostMapping("/users")
