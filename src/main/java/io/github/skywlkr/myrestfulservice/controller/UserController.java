@@ -1,8 +1,11 @@
 package io.github.skywlkr.myrestfulservice.controller;
 
-import org.springframework.web.bind.annotation.RestController;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Controller;
 
-@RestController
+@Slf4j
+@Controller
 public class UserController {
 
+    
 }
