@@ -12,11 +12,4 @@ public class User {
     private Integer id;
     private String name;
     private Date joinDate;
-
-    public User(int id, String name, Date joinDate) {
-        this.id = id;
-        this.name = name;
-        this.joinDate = joinDate;
-
-    }
 }
