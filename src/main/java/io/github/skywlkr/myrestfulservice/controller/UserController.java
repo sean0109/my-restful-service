@@ -34,10 +34,12 @@ public class UserController {
         return user;
     }
 
+    // 리소스가 정상적으로 만들어 졌음을 선언하는 api. 핸들러 메서드
     @PostMapping("/users")
     public ResponseEntity<User> createUser(@RequestBody User user) {
         User savedUser = service.save(user);
 
+        // 성공여부를 확인하는 ResponseEntity 객체를 반환한다.
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
                 .buildAndExpand(savedUser.getId())
