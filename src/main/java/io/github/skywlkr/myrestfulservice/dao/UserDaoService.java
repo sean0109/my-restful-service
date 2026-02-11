@@ -38,8 +38,8 @@ public class UserDaoService {
             user.setJoinDate(new Date());
         }
 
-        if(user.getUserName() == null) {
-            user.setUserName("테스트");
+        if(user.getName() == null) {
+            user.setName("테스트");
         }
 
         users.add(user);

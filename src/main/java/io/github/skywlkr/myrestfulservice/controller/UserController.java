@@ -5,9 +5,7 @@ import io.github.skywlkr.myrestfulservice.dao.UserDaoService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -31,6 +29,10 @@ public class UserController {
         return userDaoService.findById(id);
     }
 
+    // 회원 저장
+    @PostMapping("/users")
+    public void createUser(@RequestBody User user) {
 
-
+        User newUser = userDaoService.save(user);
+    }
 }
