@@ -28,7 +28,7 @@ public class UserController {
     }
 
     // 회원 아이디로 회원 찾기
-    @GetMapping("/user/{id}")
+    @GetMapping("/users/{id}")
     public User findById(@PathVariable Integer id) {
         return userDaoService.findById(id);
     }
