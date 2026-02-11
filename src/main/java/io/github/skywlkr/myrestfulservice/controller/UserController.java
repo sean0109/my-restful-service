@@ -2,11 +2,10 @@ package io.github.skywlkr.myrestfulservice.controller;
 
 import io.github.skywlkr.myrestfulservice.bean.User;
 import io.github.skywlkr.myrestfulservice.dao.UserDaoService;
+import io.github.skywlkr.myrestfulservice.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -23,14 +22,21 @@ public class UserController {
 
     // 모든 회원 찾기
     @GetMapping("/users")
-    public List<User> findAll() {
-        return userDaoService.getUsers();
+    public List<User> retrieveAllUsers() {
+        return userDaoService.findAll();
     }
 
     // 회원 아이디로 회원 찾기
     @GetMapping("/users/{id}")
-    public User findById(@PathVariable Integer id) {
-        return userDaoService.findById(id);
+    public User retrieveUser(@PathVariable Integer id) {
+
+        User user = userDaoService.findOne(id);
+
+        if (user == null) {
+            throw new UserNotFoundException(String.format("ID[%s] not found", id));
+        }
+
+        return user;
     }
 
     // 회원 저장

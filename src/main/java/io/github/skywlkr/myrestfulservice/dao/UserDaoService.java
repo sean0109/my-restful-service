@@ -25,7 +25,7 @@ public class UserDaoService {
     }
 
     // 전체 회원 조회
-    public List<User> getUsers() {
+    public List<User> findAll() {
         return users;
     }
 
@@ -49,7 +49,7 @@ public class UserDaoService {
     }
 
     // 아이디로 회원 찾기
-    public User findById(Integer id) {
+    public User findOne(Integer id) {
         for (User user : users) {
             if (user.getId().equals(id)) {
                 return user;
