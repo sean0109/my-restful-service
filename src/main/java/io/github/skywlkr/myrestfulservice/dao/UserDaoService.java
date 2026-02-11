@@ -12,7 +12,7 @@ public class UserDaoService {
 
     private static List<User> users = new ArrayList<>();
 
-    private static int userCount = 3;
+    private static int userCount;
 
     static {
         users.add(new User(1, "Mike", new Date()));
@@ -20,6 +20,8 @@ public class UserDaoService {
         users.add(new User(3, "Hellen", new Date()));
         users.add(new User(4, "May", new Date()));
         users.add(new User(5, "David", new Date()));
+
+        userCount =  users.size();
     }
 
     // 전체 회원 조회
@@ -31,7 +33,7 @@ public class UserDaoService {
     public User save(User user) {
 
         if (user.getId() == null) {
-            user.setId(userCount++);
+            user.setId(++userCount);
         }
 
         if (user.getJoinDate() == null) {
