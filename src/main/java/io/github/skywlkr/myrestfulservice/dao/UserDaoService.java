@@ -3,9 +3,7 @@ package io.github.skywlkr.myrestfulservice.dao;
 import io.github.skywlkr.myrestfulservice.bean.User;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Component
 public class UserDaoService {
@@ -37,13 +35,27 @@ public class UserDaoService {
         return user;
     }
 
-    public User findById(Integer id) {
+    public User findById(int id) {
 
         for (User user : users) {
-            if (user.getId().equals(id)) {
+            if (user.getId() == id) {
                 return user;
             }
         }
+        return null;
+    }
+
+    public User deleteById(int id) {
+        Iterator<User> iterator = users.iterator();
+
+        while (iterator.hasNext()) {
+            User user = iterator.next();
+            if (user.getId() == id) {
+                iterator.remove();
+                return user;
+            }
+        }
+        //  검색이 안되었을 경우
         return null;
     }
 

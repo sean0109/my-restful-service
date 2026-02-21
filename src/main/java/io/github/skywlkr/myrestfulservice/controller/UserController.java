@@ -25,11 +25,11 @@ public class UserController {
     }
 
     @GetMapping("/users/{id}")
-    public User retrieveUser(@PathVariable Integer id) {
+    public User retrieveUser(@PathVariable int id) {
         User user = service.findById(id);
 
         if (user == null) {
-            throw new UserNotFoundException(String.format("ID[%s] not found", id), id);
+            throw new UserNotFoundException(String.format("ID[%s] not found", id));
         }
         return user;
     }
@@ -46,5 +46,17 @@ public class UserController {
                 .toUri();
 
         return ResponseEntity.created(location).build();
+    }
+
+    @DeleteMapping("/users/{id}")
+    public ResponseEntity deleteUser(@PathVariable int id) {
+        User deleteUser = service.deleteById(id);
+
+        if (deleteUser == null) {
+            throw new UserNotFoundException(String.format("ID[%s] not found", id));
+        }
+
+        // 삭제된 사용자를 반환할 필요가 없으므로, noContent return
+        return ResponseEntity.noContent().build();
     }
 }
